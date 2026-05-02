@@ -1,0 +1,17 @@
+.DS_Store
+.DS_Store
+data/raw/
+data/extracted/
+src/data/
+*.zip
+*.txt
+*.csv
+*.parquet
+.DS_Store
+data/raw/
+data/extracted/
+src/data/
+*.zip
+*.txt
+*.csv
+*.parquet
