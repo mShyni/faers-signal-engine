@@ -3,7 +3,7 @@
 # Step 2: Exploratory Data Analysis charts.
 #
 # Generates the charts referenced in the interim report (Figures 1-3 and a few extras).
-# All figures are saved to outputs/figures/ as PNG files at 300 dpi (publication quality).
+# All figures are saved to outputs/figures/ as PNG files at 300 dpi.
 #
 # Charts produced:
 #   - pipeline_stage_counts.png  (Figure 1: row counts at each cleaning stage)
@@ -13,8 +13,7 @@
 #   - quarterly_volume.png       (reports per quarter line chart)
 #   - age_distribution.png       (age histogram)
 #   - reports_by_country.png     (top 10 reporting countries)
-#
-# Run this after 01_clean_and_merge.py.
+
 
 from pathlib import Path
 import pandas as pd
