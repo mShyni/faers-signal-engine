@@ -6,23 +6,10 @@
 #                   at least one quarter before their addition to the product label,
 #                   with median lead time >= 2 quarters (Wilcoxon signed-rank p < 0.05).
 #                   Random Survival Forest concordance index >= 0.65.
-#
-# What this script does:
-#   1. Load the analytic table
-#   2. Filter to seven approved immune checkpoint inhibitors
-#   3. Build cumulative quarterly EBGM trajectories per (ICI, PT) pair across 12 quarters
-#   4. For each pair, find the first quarter at which EB05 > 2 (event), or right-censor at 2025Q4
-#   5. Load labelled irAEs reference (data/reference/ici_label_revisions.csv)
-#   6. Compute lead time (engine first detection - label revision date) per labelled pair
-#   7. Wilcoxon signed-rank test: lead time > 0 quarters?
-#   8. Fit Random Survival Forest with covariates: ICI ingredient, MedDRA SOC,
-#      log cumulative report volume
-#   9. Compute concordance index (Harrell's c-index)
-#  10. Save trajectories, lead-time table, model results, and figures
-#
+
 # Required input file: data/reference/ici_label_revisions.csv with columns:
 #   ingredient, pt, label_revision_quarter, soc
-# Use 07b_make_ici_template.py to generate a starter you can edit.
+
 
 from pathlib import Path
 import numpy as np
