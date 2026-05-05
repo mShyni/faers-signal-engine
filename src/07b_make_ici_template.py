@@ -5,15 +5,7 @@
 # checkpoint inhibitors. The label_revision_quarter is the FAERS quarter
 # in which the irAE was added to the product label (Adverse Reactions or
 # Warnings/Precautions section).
-#
-# IMPORTANT: The dates below are PLACEHOLDERS based on the original product
-# label dates and well-known label revisions. You should verify and update
-# them from the actual FDA labels at https://accessdata.fda.gov/scripts/cder/daf/
-# before final analysis. For irAEs that were already on the label before the
-# 2023Q1 study window starts, set label_revision_quarter to 2023Q1 - this means
-# any engine detection during the study period is "after the fact" and will
-# show as a non-positive lead time, which is the conservative interpretation.
-#
+
 # Required columns: ingredient, pt, label_revision_quarter, soc
 
 from pathlib import Path
