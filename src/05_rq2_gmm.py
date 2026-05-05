@@ -16,15 +16,7 @@
 #   - Ranking by posterior probability of high-signal membership must reach
 #     Spearman rho > 0.85 with EBGM rank
 #
-# What this script does:
-#   1. Load the candidate set
-#   2. Standardize the four log-transformed disproportionality scores
-#   3. Fit GMM for k = 1..6 components, pick best by BIC
-#   4. Compute silhouette on a sample (silhouette is O(n^2) - sample for speed)
-#   5. Identify the high-signal component
-#   6. Compute Spearman correlation between posterior probability and EBGM rank
-#   7. Compute the cross-method concordance correlation matrix (Table for Table 11)
-#   8. Save outputs and figures
+
 
 from pathlib import Path
 import numpy as np
@@ -65,8 +57,7 @@ def main():
 
     # ---------- Cross-method concordance (RQ2 motivation) ----------
     # Spearman rho between every pair of methods. Confirms / quantifies the high
-    # frequentist concordance and lower frequentist-vs-Bayesian concordance noted
-    # in the interim report.
+    # frequentist concordance and lower frequentist-vs-Bayesian concordance 
     print("\nComputing cross-method Spearman correlations...")
     methods = ["ror", "prr", "ic", "ebgm"]
     corr = pd.DataFrame(index=methods, columns=methods, dtype=float)
