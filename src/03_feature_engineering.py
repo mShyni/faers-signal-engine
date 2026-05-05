@@ -2,29 +2,12 @@
 #
 # Step 3: Build the (ingredient, PT) candidate set and compute four disproportionality scores.
 #
-# What this script does in plain language:
-#   1. Loads the analytic table from step 1
-#   2. Counts how many distinct reports mention each (ingredient, PT) pair
-#   3. Keeps only pairs with at least 3 reports (a >= 3) - the standard signal-detection
-#      minimum cell threshold (Evans et al., 2001)
-#   4. Builds the 2x2 contingency table for each pair (a, b, c, d)
-#   5. Computes the four canonical disproportionality measures:
-#        - Reporting Odds Ratio (ROR) with 95% CI lower bound
-#        - Proportional Reporting Ratio (PRR) with chi-square statistic
-#        - Information Component (IC) with IC025 lower credible bound (BCPNN, Bate 1998)
-#        - Empirical Bayes Geometric Mean (EBGM) with EB05 lower bound
-#          (Gamma-Poisson shrinkage, DuMouchel 1999)
-#   6. Adds binary "flag" columns for each method at conventional thresholds
-#   7. Saves the candidate set to data/processed/candidate_set.parquet
-#
+
 # About the EBGM implementation:
 #   The R package openEBGM uses a 2-component Gamma mixture prior (DuMouchel 1999).
 #   This script uses a SIMPLIFIED single-component Gamma prior with hyperparameters
 #   estimated by method of moments on the empirical relative reporting ratio (RR).
-#   This is faster, simpler to understand, and gives EBGM values that correlate
-#   strongly (Spearman rho > 0.95) with the full mixture model in published
-#   benchmarks. For the final write-up, you can swap in openEBGM via rpy2 if
-#   needed (see the function ebgm_via_openebgm at the bottom for a stub).
+
 
 from pathlib import Path
 import numpy as np
