@@ -1,16 +1,6 @@
-# src/download_extract_faers.py
-
 from pathlib import Path
-import requests
 import zipfile
-
-BASE_URL = "https://fis.fda.gov/content/Exports/faers_ascii_{}.zip"
-
-QUARTERS = [
-    "2023q1", "2023q2", "2023q3", "2023q4",
-    "2024q1", "2024q2", "2024q3", "2024q4",
-    "2025q1", "2025q2", "2025q3", "2025q4",
-]
+import requests
 
 RAW_DIR = Path("data/raw")
 EXTRACT_DIR = Path("data/extracted")
@@ -18,23 +8,31 @@ EXTRACT_DIR = Path("data/extracted")
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 EXTRACT_DIR.mkdir(parents=True, exist_ok=True)
 
+QUARTERS = [
+    "2023q1", "2023q2", "2023q3", "2023q4",
+    "2024q1", "2024q2", "2024q3", "2024q4",
+    "2025q1", "2025q2", "2025q3", "2025q4",
+]
+
+BASE_URL = "https://fis.fda.gov/content/Exports/faers_ascii_{}.zip"
+
 
 def download_file(url, output_path):
     if output_path.exists():
-        print(f"Already downloaded: {output_path.name}")
+        print(f"Already downloaded: {output_path}")
         return
 
     print(f"Downloading: {url}")
 
-    response = requests.get(url, stream=True, timeout=120)
+    response = requests.get(url, stream=True, timeout=60)
     response.raise_for_status()
 
     with open(output_path, "wb") as file:
-        for chunk in response.iter_content(chunk_size=1024 * 1024):
+        for chunk in response.iter_content(chunk_size=8192):
             if chunk:
                 file.write(chunk)
 
-    print(f"Saved: {output_path}")
+    print(f"Downloaded to: {output_path}")
 
 
 def extract_zip(zip_path, extract_to):
