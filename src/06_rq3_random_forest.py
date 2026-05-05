@@ -7,24 +7,11 @@
 #                   absolute AUC difference >= 0.03 (bootstrap p < 0.05).
 #                   Permutation feature importance ranks EBGM and IC as dominant.
 #
-# What this script does:
-#   1. Load the candidate set
-#   2. Load the OMOP reference labels CSV (positive / negative drug-event pairs)
-#   3. Inner-join candidates with the OMOP testable subset
-#   4. Train a Random Forest classifier on six features:
-#        log_ror, log_prr, ic, log_ebgm, log(a), log(expected)
-#   5. Train a logistic regression baseline on the same features
-#   6. Compute single-method baselines (each disproportionality score on its own)
-#   7. 5-fold stratified cross-validated AUC for all classifiers
-#   8. Bootstrap test for AUC difference (RF vs best single method)
-#   9. Permutation feature importance
-#  10. Save ROC curves, importance plot, and a results CSV
-#
+
 # About the OMOP reference file:
-#   You need a CSV at data/reference/omop_reference.csv with columns:
+#   Need a CSV at data/reference/omop_reference.csv with columns:
 #     ingredient (uppercase RxNorm), pt (MedDRA Preferred Term, Title Case), label (0 or 1)
-#   See the helper script 06b_make_omop_template.py to generate a starter template
-#   you can fill in from Ryan et al. (2013) and Harpaz et al. (2014).
+
 
 from pathlib import Path
 import numpy as np
