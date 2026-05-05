@@ -9,16 +9,7 @@
 #   - H1a accepted if Spearman rho >= 0.60 between anomaly score and conventional
 #     flag count (p < 0.001)
 #   - AND Cohen's kappa >= 0.60 between top decile of anomaly score and consensus flag
-#
-# What this script does:
-#   1. Load the candidate set from step 3
-#   2. Take the four disproportionality scores: log(ROR), log(PRR), IC, log(EBGM)
-#   3. Standardize them
-#   4. Fit an Isolation Forest (no labels needed - this is unsupervised)
-#   5. Get the anomaly score for every pair (higher = more anomalous = stronger signal)
-#   6. Compare to the conventional flag count via Spearman correlation
-#   7. Compare top-decile anomalies to consensus flag via Cohen's kappa
-#   8. Save scored output and a small results table
+
 
 from pathlib import Path
 import numpy as np
